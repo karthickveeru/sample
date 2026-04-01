@@ -1,0 +1,30 @@
+name: ServiceNow POC Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Step
+        run: echo "Building application..."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Test Step
+        run: echo "Running tests..."
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Deploy Step
+        run: echo "Deploying application..."
