@@ -36,9 +36,13 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=service-now-poc
+            -Dsonar.organization=service-now-poc
 
   ServiceNowDevOpsChange:
-    needs: test
+    needs: sonarqube
     runs-on: ubuntu-latest
     name: 'ServiceNow DevOps Change'
     steps:
