@@ -35,6 +35,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'ServiceNow DevOps Change'
+          change-request: '{"attributes":{"chg_model":{"name":"Normal Change"}}}'
 
   deploy:
     runs-on: ubuntu-latest
