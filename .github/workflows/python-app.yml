@@ -41,6 +41,20 @@ jobs:
             -Dsonar.projectKey=service-now-poc
             -Dsonar.organization=service-now-poc
 
+  register_artifact:
+    runs-on: ubuntu-latest
+    needs: sonarqube
+    steps:
+      - name: ServiceNow DevOps Artifact
+        uses: ServiceNow/servicenow-devops-artifact@v5.1.0
+        with:
+          devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+          instance-url: ${{ secrets.SN_INSTANCE_URL }}
+          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+          context-github: ${{ toJSON(github) }}
+          job-name: 'register_artifact'
+          artifacts: '[{"name":"poc-app","version":"${{ github.run_number }}","semanticVersion":"${{ github.run_number }}","repositoryName":"${{ github.repository }}"}]'
+
   ServiceNowDevOpsChange:
     needs: sonarqube
     runs-on: ubuntu-latest
