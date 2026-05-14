@@ -19,7 +19,7 @@ name: ServiceNow POC Pipeline
           uses: ServiceNow/servicenow-devops-register-artifact@v3.1.0
           with:
             devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-            instance-url: ${{ secrets.SN_INSTANCE_URL }}
+            instance-url: ${{ vars.SN_INSTANCE_URL }}
             tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
             context-github: ${{ toJSON(github) }}
             job-name: build
@@ -37,7 +37,7 @@ name: ServiceNow POC Pipeline
           uses: ServiceNow/servicenow-devops-register-package@v3.1.0
           with:
             devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-            instance-url: ${{ secrets.SN_INSTANCE_URL }}
+            instance-url: ${{ vars.SN_INSTANCE_URL }}
             tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
             context-github: ${{ toJSON(github) }}
             job-name: build
@@ -87,7 +87,7 @@ name: ServiceNow POC Pipeline
     #       uses: ServiceNow/servicenow-devops-change@v5.1.0
     #       with:
     #         devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-    #         instance-url: ${{ secrets.SN_INSTANCE_URL }}
+    #         instance-url: ${{ vars.SN_INSTANCE_URL }}
     #         tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
     #         context-github: ${{ toJSON(github) }}
     #         job-name: 'ServiceNow DevOps Change'
