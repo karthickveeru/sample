@@ -29,7 +29,9 @@ jobs:
                 "name": "cadence-app",
                 "version": "1.0.${{ github.run_number }}",
                 "semanticVersion": "1.0.${{ github.run_number }}",
-                "repositoryName": "${{ github.repository }}"
+                "repositoryName": "${{ github.repository }}",
+                "branchName": "${{ github.ref_name }}",
+                "commitId": "${{ github.sha }}"
               }
             ]
 
@@ -47,7 +49,9 @@ jobs:
                 "name": "cadence-app",
                 "version": "1.0.${{ github.run_number }}",
                 "semanticVersion": "1.0.${{ github.run_number }}",
-                "repositoryName": "${{ github.repository }}"
+                "repositoryName": "${{ github.repository }}",
+                "branchName": "${{ github.ref_name }}",
+                "commitId": "${{ github.sha }}"
               }
             ]
           package-name: cadence-package-1.0.${{ github.run_number }}
