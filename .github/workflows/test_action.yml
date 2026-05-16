@@ -6,6 +6,30 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Test Step
+        run: echo "Running tests..."
+  sonarqube:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=service-now-poc
+            -Dsonar.organization=service-now-poc
   build:
     runs-on: ubuntu-latest
     steps:
@@ -56,50 +80,28 @@ jobs:
             ]
           package-name: cadence-package-1.0.${{ github.run_number }}
 
-  test:
+  
+
+  
+
+  ServiceNowDevOpsChange:
+    needs: sonarqube
     runs-on: ubuntu-latest
-    needs: build
+    name: 'ServiceNow DevOps Change'
     steps:
-      - name: Test Step
-        run: echo "Running tests..."
+      - name: ServiceNow Change
+        uses: ServiceNow/servicenow-devops-change@v5.1.0
+        with:
+          devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+          instance-url: ${{ vars.SN_INSTANCE_URL }}
+          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+          context-github: ${{ toJSON(github) }}
+          job-name: 'ServiceNow DevOps Change'
+          change-request: '{"attributes":{"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}'
 
-  sonarqube:
+  deploy:
     runs-on: ubuntu-latest
-    needs: test
+    needs: ServiceNowDevOpsChange
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        with:
-          args: >
-            -Dsonar.projectKey=service-now-poc
-            -Dsonar.organization=service-now-poc
-
-  # ServiceNowDevOpsChange:
-  #   needs: sonarqube
-  #   runs-on: ubuntu-latest
-  #   name: 'ServiceNow DevOps Change'
-  #   steps:
-  #     - name: ServiceNow Change
-  #       uses: ServiceNow/servicenow-devops-change@v5.1.0
-  #       with:
-  #         devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-  #         instance-url: ${{ vars.SN_INSTANCE_URL }}
-  #         tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-  #         context-github: ${{ toJSON(github) }}
-  #         job-name: 'ServiceNow DevOps Change'
-  #         change-request: '{"attributes":{"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}'
-
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: ServiceNowDevOpsChange
-  #   steps:
-  #     - name: Deploy Step
-  #       run: echo "Deploying application..."
+      - name: Deploy Step
+        run: echo "Deploying application..."
