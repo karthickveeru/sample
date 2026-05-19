@@ -85,7 +85,7 @@ jobs:
   
 
   ServiceNowDevOpsChange:
-    # needs: sonarqube
+    needs: build
     runs-on: ubuntu-latest
     name: 'ServiceNow DevOps Change'
     steps:
@@ -97,7 +97,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'ServiceNow DevOps Change'
-          change-request: '{"attributes":{"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}'
+          change-request: '{"attributes":{"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed", "assignment_group": "553032e853165110b846ddeeff7b12aa"}}'
 
   deploy:
     runs-on: ubuntu-latest
