@@ -85,7 +85,7 @@ jobs:
   
 
   ServiceNowDevOpsChange:
-    needs: sonarqube
+    # needs: sonarqube
     runs-on: ubuntu-latest
     name: 'ServiceNow DevOps Change'
     steps:
