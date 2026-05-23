@@ -5,3 +5,8 @@ def print_step_1():
   print('test ok33745z77s')
   print('test ok333ssd333')
   print('test ok3333')
+
+def print_step_2():
+  print('test ok33745z77s')
+  print('test ok333ssd333')
+  print('test ok3333')
