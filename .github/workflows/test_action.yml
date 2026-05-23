@@ -29,9 +29,9 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=SNOW-CV_POC
-            # -Dsonar.organization=service-now-poc
   build:
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -85,7 +85,7 @@ jobs:
   
 
   ServiceNowDevOpsChange:
-    needs: build
+    needs: sonarqube
     runs-on: ubuntu-latest
     name: 'ServiceNow DevOps Change'
     steps:
