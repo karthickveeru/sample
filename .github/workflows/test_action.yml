@@ -28,8 +28,8 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.projectKey=service-now-poc
-            -Dsonar.organization=service-now-poc
+            -Dsonar.projectKey=SNOW-CV_POC
+            # -Dsonar.organization=service-now-poc
   build:
     runs-on: ubuntu-latest
     steps:
