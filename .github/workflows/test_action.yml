@@ -40,6 +40,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           job-name: 'sonarqube'
           sonar-project-key: 'snow-poc'
+          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
 
   build:
     runs-on: ubuntu-latest
