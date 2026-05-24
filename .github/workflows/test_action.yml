@@ -37,6 +37,7 @@ jobs:
           instance-url: ${{ vars.SN_INSTANCE_URL }}
           devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
           context-github: ${{ toJSON(github) }}
+          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           job-name: 'sonarqube'
           sonar-project-key: 'snow-poc'
 
