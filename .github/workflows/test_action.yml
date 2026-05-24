@@ -32,7 +32,7 @@ jobs:
       - name: ServiceNow DevOps Sonar Scan Notification
         # This line forces the step to run ONLY if the SonarQube Scan step succeeded
         if: success()
-        uses: ServiceNow/servicenow-devops-sonar@v3.0.0
+        uses: ServiceNow/servicenow-devops-sonar@v3.1.0
         with:
           instance-url: ${{ vars.SN_INSTANCE_URL }}
           devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
