@@ -29,6 +29,16 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=snow-poc
+      - name: ServiceNow DevOps Sonar Scan Notification
+        # This line forces the step to run ONLY if the SonarQube Scan step succeeded
+        if: success()
+        uses: ServiceNow/servicenow-devops-sonar@v3.0.0
+        with:
+          instance-url: ${{ vars.SN_INSTANCE_URL }}
+          devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+          context-github: ${{ toJSON(github) }}
+          job-name: 'sonarqube'
+          sonar-project-key: 'snow-poc'
 
   build:
     runs-on: ubuntu-latest
