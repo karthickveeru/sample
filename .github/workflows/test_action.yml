@@ -28,7 +28,8 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.projectKey=SNOW-CV_POC
+            -Dsonar.projectKey=snow-poc
+
   build:
     runs-on: ubuntu-latest
     
