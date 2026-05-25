@@ -25,6 +25,7 @@ class TestRemoteCreated(unittest.TestCase):
     def test_print_step_5(self, mock_print):
         from remote_created import print_step_5
         print_step_5()
+        print('ok')
         self.assertTrue(mock_print.called)
 
 
