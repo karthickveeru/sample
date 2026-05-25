@@ -4,7 +4,7 @@ print('remote created')
 def print_step_1():
   print('test ok33745z77s')
   print('test ok333ssd333')
-  print('test ok3333')
+  print('test ok3333xx')
 
 def print_step_2():
   print('test ok33745z77s')
