@@ -20,3 +20,7 @@ def print_step_5():
   print('test ok33745z77asasxsxs')
   print('test ok333ssd333')
   print('test ok333scsdc355xsdcs5')
+
+def print_step_6():
+  print('test sdcs)
+ 
