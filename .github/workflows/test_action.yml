@@ -10,8 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Test Step
-        run: echo "Running tests..."
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install pytest pytest-cov
+      - name: Run tests with coverage
+        run: pytest test_suite.py --cov=. --cov-report=xml
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+
   sonarqube:
     runs-on: ubuntu-latest
     needs: test
@@ -20,6 +34,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
@@ -29,6 +47,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=snow-poc
+            -Dsonar.python.coverage.reportPaths=coverage.xml
       - name: ServiceNow DevOps Sonar Scan Notification
         # This line forces the step to run ONLY if the SonarQube Scan step succeeded
         if: success()
