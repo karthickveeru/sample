@@ -22,5 +22,5 @@ def print_step_5():
   print('test ok333scsdc355xsdcs5')
 
 def print_step_6():
-  print('test sdcs)
+  print('test sdcs')
  
