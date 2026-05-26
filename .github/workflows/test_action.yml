@@ -121,6 +121,10 @@ jobs:
     runs-on: ubuntu-latest
     name: 'ServiceNow DevOps Change'
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: ServiceNow Change
         uses: ServiceNow/servicenow-devops-change@v5.1.0
         with:
