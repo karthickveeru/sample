@@ -23,4 +23,7 @@ def print_step_5():
 
 def print_step_6():
   print('test sdcs')
+
+def print_step_7():
+  print('test 232sdcs')
  
