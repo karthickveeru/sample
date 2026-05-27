@@ -29,3 +29,13 @@ def print_step_7():
  
 def print_step_8():
   print('step8')
+
+def print_step_9():
+  print('step9 line1')
+  print('step9 line2')
+  print('step9 line3')
+
+def print_step_10():
+  print('step10 line1')
+  print('step10 line2')
+  print('step10 line3')
