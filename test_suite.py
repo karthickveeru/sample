@@ -43,6 +43,19 @@ class TestRemoteCreated(unittest.TestCase):
         self.assertTrue(mock_print.called)
 
 
+    @patch('builtins.print')
+    def test_print_step_8(self, mock_print):
+        from remote_created import print_step_8
+        print_step_8()
+        self.assertTrue(mock_print.called)
+
+    @patch('builtins.print')
+    def test_print_step_9(self, mock_print):
+        from remote_created import print_step_9
+        print_step_9()
+        self.assertTrue(mock_print.called)
+
+
 class TestTestModule(unittest.TestCase):
     @patch('builtins.print')
     def test_p1(self, mock_print):
