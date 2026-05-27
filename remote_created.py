@@ -29,3 +29,6 @@ def print_step_7():
  
 def print_step_8():
   print('step8')
+
+def print_step_9():
+  print('step9')
